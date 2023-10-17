@@ -98,6 +98,4 @@ print_performance(explore_results[0], explore_results[1])
 # exploitation
 print_performance(exploit_results[0], exploit_results[1])
 
-m['environment']['found_reward'] for m in metrics
-
 print([m['agent']['fitness'] for m in explore_results[1] if m['environment']['found_reward']].mean()]
