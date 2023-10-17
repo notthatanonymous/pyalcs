@@ -78,6 +78,8 @@ def perform_experiment(cfg, env):
     # explore phase
     agent = ACS2(cfg)
     population_explore, metrics_explore = agent.explore(env, EXPLORE_TRIALS)
+
+    print(metrics_explore)
     
     # exploit phase, reinitialize agent with population above
     agent = ACS2(cfg, population=population_explore)
