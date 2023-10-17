@@ -90,9 +90,7 @@ def perform_experiment(cfg, env):
 
 explore_results, exploit_results = perform_experiment(cfg, fl_env)
 
-print(explore_results[0])
-print("\n")
-print(explore_results[1])
+#print(explore_results[1])
 
 # exploration
 print_performance(explore_results[0], explore_results[1])
@@ -100,10 +98,6 @@ print_performance(explore_results[0], explore_results[1])
 # exploitation
 print_performance(exploit_results[0], exploit_results[1])
 
-# explore_results_2, exploit_results_2 = perform_experiment(cfg, fl_ns_env)
+m['environment']['found_reward'] for m in metrics
 
-
-# # exploration
-# print_performance(explore_results_2[0], explore_results_2[1])
-# # exploitation
-# print_performance(exploit_results_2[0], exploit_results_2[1])
+print([m['agent']['fitness'] for m in explore_results[1] if m['environment']['found_reward']].mean()]
