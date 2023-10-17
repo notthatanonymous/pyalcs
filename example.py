@@ -92,10 +92,10 @@ explore_results, exploit_results = perform_experiment(cfg, fl_env)
 
 #print(explore_results[1])
 
-# exploration
-print_performance(explore_results[0], explore_results[1])
+# # exploration
+# print_performance(explore_results[0], explore_results[1])
 
-# exploitation
-print_performance(exploit_results[0], exploit_results[1])
+# # exploitation
+# print_performance(exploit_results[0], exploit_results[1])
 
-print([m['agent']['fitness'] for m in explore_results[1] if m['environment']['found_reward']])
+print(print(f"\n\n\nScore: {np.mean([m['agent']['fitness'] for m in explore_results[1] if m['environment']['found_reward']])}\n\n\n"))
