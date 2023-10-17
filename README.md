@@ -1,66 +1,44 @@
 # Anticipatory Learning Classifier Systems in Python
 Repository containing code implementation for various *Anticipatory Learning Classifier Systems* (ALCS).
 
-[![Build Status](https://travis-ci.org/ParrotPrediction/pyalcs.svg?branch=master)](https://travis-ci.org/ParrotPrediction/pyalcs) [![Documentation Status](https://readthedocs.org/projects/pyalcs/badge/?version=latest)](https://pyalcs.readthedocs.io/en/latest/?badge=latest)
+[![Build Status](https://travis-ci.org/ParrotPrediction/pyalcs.svg?branch=master)](https://travis-ci.org/ParrotPrediction/pyalcs)
 
-The main advantage of *Learning Classifier Systems* with respect to other RL techniques it to afford generalization capabilities. This makes it possible to aggregate several situations within a common description so that the representation of the problem gets smaller.
+ALCS are is an extension to basic LCS compromising the notation of anticipations. Doing that the systems predominantly are able to **anticipate perceptual consequences of actions** independent of a reinforcement predictions.
+ 
+ ALCS are able to form complete anticipatory representation (build environment model) which allows faster
+ and more intelligent adaptation of behaviour or problem classification.
 
-## Development
-```
-pip install -U commitizen
-cz bump --check-consistency --changelog
-git push origin --tags
-```
 
-## Agents
+## Deep dive
+Before working with code please install few required dependencies (code is running on Python 3). Make sure Swig binary is installed (required to compile OpenAI Gym environments)
 
-### ACS
-Introduced by _Stolzmann_ in 1997 originally intended to simulate and evaluate Hoffmann's learning theory of anticipations.
-- LCS framework with explicit representation of anticipations
-- directed anticipatory learning process
+    make install_deps
 
-### ACS2
-Added modifications:
-- start with initially empty population of classifiers that are created by covering mechanism,
-- genetic generalization mechanism
-- population includes C-A-E triples that anticipate no change in the environment (ACS by default assumes no changes),
-- after executing an action modification are applied to all action set [A],
-- classifier has an extra property of "immediate reward".
+## Original code
+The original author's code is located in `assets/original` directory.
 
-### YACS
-- Different heuristics
-- Does not generalize wrt. payoff prediction (therefore classifiers itself don't store the information about the reward)
-- Only deals with deterministic and markov environments
+However it was written in 2001 when C++ was quite different than now. For that reason a slightly changed version (syntax) working on nowadays compilers can be found in `assets/ACS2`.
 
-### MACS
-- Extends ACS, ACS2, YACS by the possibility to detect interactions between attributes (because they consider each situation as an unsecable whole - new value of the attribute may only depend upon the previous value of the same attribute).
-- A _"don't know (?)"_ symbol is used in effect part instead of _"don't change (#)"_.
-- **TODO**: Still not running fully accurate on rotating maze environment
+To compile the sources type (inside `assets/ACS2`):
 
-References
-- _["Combining latent learning with dynamic programming in the modular anticipatory classifier system"](https://www.sciencedirect.com/science/article/pii/S0377221703006611)_ by P. Gérard, JA. Meyer, O. Sigaud 
+    make
 
-## Documentation
-Documentation is available [here](https://pyalcs.readthedocs.io).
+And to run it:
 
-### Citation
-If you want to use the library in your project please cite the following:
+    ./acs2++.out <environment>
 
-    @inbook{
-        title = "Integrating Anticipatory Classifier Systems with OpenAI Gym",
-        keywords = "Aniticipatory Learning Classifier Systems, OpenAI Gym",
-        author = "Norbert Kozlowski, Olgierd Unold",
-        year = "2018",
-        doi = "10.1145/3205651.3208241",
-        isbn = "978-1-4503-5764-7/18/07",
-        booktitle = "Proceedings of the Genetic and Evolutionary Computation Conference (GECCO '18)",
-        publisher = "Association for Computing Machinery",
-    }
+For example:
 
+    ./acs2++.out Envs/Maze4.txt
+
+### Agents
+
+#### [ACS2](alcs/acs2/ACS2.py)
+ACS2 is derived from the original ACS framework. The most important change is that it embodies genetic generalization mechanism. Implementation based on *"An Algorithmic Description of ACS2"* by Martin V. Butz and Wolfgang Stolzmann.
+
+## Contribution
 Prior to PR please execute to check if standards are holding:
 
     make test
-
-## See also
-- [Dedicated OpenAI Gym environments](https://github.com/ParrotPrediction/openai-envs)
-- [Examples of integration and interactive notebooks](https://github.com/ParrotPrediction/pyalcs-experiments)
+    make coverage
+    make pep8

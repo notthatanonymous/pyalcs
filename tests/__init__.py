@@ -1,1 +1,1 @@
-from tests.lcs.agents.acs2 import *
+from .acs2 import *
