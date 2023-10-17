@@ -49,7 +49,7 @@ def print_performance(population, metrics):
     population.sort(key=lambda cl: -cl.fitness)
     population_count = len(population)
     reliable_count = len([cl for cl in population if cl.is_reliable()])
-    successful_trials = sum(m['found_reward'] for m in metrics)
+    successful_trials = sum(m['environment']['found_reward'] for m in metrics) #m['found_reward'] for m in metrics)
 
     print("Number of classifiers: {}".format(population_count))
     print("Number of reliable classifiers: {}".format(reliable_count))
@@ -78,8 +78,6 @@ def perform_experiment(cfg, env):
     # explore phase
     agent = ACS2(cfg)
     population_explore, metrics_explore = agent.explore(env, EXPLORE_TRIALS)
-
-    print(metrics_explore)
     
     # exploit phase, reinitialize agent with population above
     agent = ACS2(cfg, population=population_explore)
