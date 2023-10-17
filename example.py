@@ -68,4 +68,29 @@ cfg = ACS2Configuration(
     theta_i=0.3,
     epsilon=0.7)
 
-print(cfg)
+# print(cfg)
+
+
+EXPLORE_TRIALS = 2000
+EXPLOIT_TRIALS = 100
+
+def perform_experiment(cfg, env):
+    # explore phase
+    agent = ACS2(cfg)
+    population_explore, metrics_explore = agent.explore(env, EXPLORE_TRIALS)
+    
+    # exploit phase, reinitialize agent with population above
+    agent = ACS2(cfg, population=population_explore)
+    population_exploit, metrics_exploit = agent.exploit(env, EXPLOIT_TRIALS)
+    
+    return (population_explore, metrics_explore), (population_exploit, metrics_exploit)
+
+
+
+
+explore_results, exploit_results = perform_experiment(cfg, fl_env) 
+
+
+
+# exploration
+print_performance(explore_results[0], explore_results[1])
