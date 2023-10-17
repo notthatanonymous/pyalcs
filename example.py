@@ -41,6 +41,9 @@ def one_hot_encode(state):
     vec[state] = 'X'
     return ''.join(vec)
     
+# We assume if the final state was with number 15 that the algorithm found the reward. Otherwise not
+def collect_env_metrics(env):
+    return {'found_reward': env.env.s == 15}
 
 def print_performance(population, metrics):
     population.sort(key=lambda cl: -cl.fitness)
