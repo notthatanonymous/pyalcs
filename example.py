@@ -90,16 +90,20 @@ def perform_experiment(cfg, env):
 
 explore_results, exploit_results = perform_experiment(cfg, fl_env)
 
+print(explore_results[0])
+print("\n")
+print(explore_results[1])
+
 # exploration
 print_performance(explore_results[0], explore_results[1])
 
 # exploitation
 print_performance(exploit_results[0], exploit_results[1])
 
-explore_results_2, exploit_results_2 = perform_experiment(cfg, fl_ns_env)
+# explore_results_2, exploit_results_2 = perform_experiment(cfg, fl_ns_env)
 
 
-# exploration
-print_performance(explore_results_2[0], explore_results_2[1])
-# exploitation
-print_performance(exploit_results_2[0], exploit_results_2[1])
+# # exploration
+# print_performance(explore_results_2[0], explore_results_2[1])
+# # exploitation
+# print_performance(exploit_results_2[0], exploit_results_2[1])
